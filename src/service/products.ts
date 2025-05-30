@@ -3,12 +3,17 @@ import axios from "axios";
 export default class ServiceProducts {
   constructor() {}
 
-  async loadProducts() {
+  async loadProducts(lim: number, skip: number) {
     const { data } = await axios.get(
-      "https://dummyjson.com/products?limit=10&skip=10"
+      `https://dummyjson.com/products?&limit=${lim}&skip=${skip}`
     );
+    return data;
+  }
 
-    console.log(data);
+  async loadOneProduct(productId: string) {
+    const { data } = await axios.get(
+      `https://dummyjson.com/products/${productId}`
+    );
     return data;
   }
 }
