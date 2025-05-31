@@ -5,9 +5,190 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <header class="header">
+        <div class="header__logo">
+          <img src="./src/assets/images/logo-icon.png" alt="" />
+        </div>
+        <nav class="header__nav">
+          <a href="/index.html" class="header__home">Home</a>
+          <a href="/products.html" class="header__shop">Shop</a>
+          <a href="" class="header__about">About</a>
+          <a href="" class="header__contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <a href=""><img src="./src/assets/images/user-icon.png" alt="" /></a>
+          <a href=""
+            ><img src="./src/assets/images/search-icon.png" alt=""
+          /></a>
+          <a href="./favorites.html"
+            ><img src="./src/assets/images/favorites-icon.png" alt=""
+          /></a>
+          <a href="/cart.html"
+            ><img src="./src/assets/images/cart-icon.png" alt=""
+          /></a>
+        </div>
+      </header>
+      <main>
+        <section class="hero">
+          <div class="hero__content">
+            <h1 class="hero__title">Shop</h1>
+            <ul class="hero__list">
+              <li class="hero__item">
+                <a href="/index.html" class="hero__link">Home</a>
+              </li>
+              <li class="hero__item">
+                <img
+                  src="./src/assets/images.products/Vector (37).png"
+                  class="hero__separator"
+                />
+              </li>
+              <li class="hero__item">
+                <a href="/products.html" class="hero__link">Shop</a>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="filter-bar">
+          <div class="filter-bar__container">
+            <button class="filter-bar__filter-btn">
+              <img src="./src/assets/images.products/filter-icon.svg" />
+              <span class="filter-bar__filter-text">Filter</span>
+            </button>
+            <button class="filter-bar__grid-btn">
+              <img src="./src/assets/images.products/four-dots-icon.svg" />
+            </button>
+            <button class="filter-bar__list-btn">
+              <img src="./src/assets/images.products/view list.svg" />
+            </button>
+            <button>
+              <img src="./src/assets/images.products/line-icon.svg" />
+            </button>
+            <p class="filter-bar__info">
+              Showing <span>0</span> of <span>0</span> results
+            </p>
+          </div>
+
+          <div class="filter-controls">
+            <div class="filter-controls__group">
+              <label for="items-per-page" class="filter-controls__label"
+                >Show</label
+              >
+              <select id="items-per-page" class="filter-controls__select">
+                <option value="8">8</option>
+                <option value="12">12</option>
+                <option value="16">16</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+
+            <div class="filter-controls__group">
+              <label for="sort-by" class="filter-controls__label"
+                >Sort by</label
+              >
+              <select id="sort-by" class="filter-controls__select">
+                <option value="default">Default</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="newness-desc">Newest</option>
+              </select>
+            </div>
+          </div>
+        </section>
+        <section class="products__container">
+          <ul class="products__list"></ul>
+          <div class="products__page-btns">
+            <button class="products__page-btn">1</button>
+            <button class="products__page-btn">2</button>
+            <button class="products__page-btn">3</button>
+            <button class="products__page-btn">Next</button>
+          </div>
+        </section>
+        <section class="store-benefits">
+          <ul class="store-benefits__list">
+            <li class="store-benefits__item">
+              <img src="./src/assets/images.products/cup-icon.svg" alt="" />
+              <div class="store-benefits__info">
+                <h2 class="store-benefits__title">High Quality</h2>
+                <p class="store-benefits__text">crafted from top materials</p>
+              </div>
+            </li>
+            <li class="store-benefits__item">
+              <img
+                src="./src/assets/images.products/confirmation-checkmark.svg"
+                alt=""
+              />
+              <div class="store-benefits__info">
+                <h2 class="store-benefits__title">Warranty Protection</h2>
+                <p class="store-benefits__text">Over 2 years</p>
+              </div>
+            </li>
+            <li class="store-benefits__item">
+              <img
+                src="./src/assets/images.products/delivery-icon.svg"
+                alt=""
+              />
+              <div class="store-benefits__info">
+                <h2 class="store-benefits__title">Free Shipping</h2>
+                <p class="store-benefits__text">Order over 150 $</p>
+              </div>
+            </li>
+            <li class="store-benefits__item">
+              <img src="./src/assets/images.products/support-icon.svg" alt="" />
+              <div class="store-benefits__info">
+                <h2 class="store-benefits__title">24 / 7 Support</h2>
+                <p class="store-benefits__text">Dedicated support</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="footer__container">
+          <div>
+            <h3 class="footer__title">Funiro.</h3>
+            <p>400 University Drive Suite 200 Coral Gables, FL 33134 USA</p>
+          </div>
+          <div>
+            <p>Links</p>
+            <ul class="footer__list">
+              <li>Home</li>
+              <li>Shop</li>
+              <li>About</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+          <div>
+            <p>Help</p>
+            <ul class="footer__list">
+              <li>Payment Options</li>
+              <li>Returns</li>
+              <li>Privacy Policies</li>
+            </ul>
+          </div>
+          <div>
+            <p>Newsletter</p>
+            <div class="footer__subscribe">
+              <input
+                placeholder="Enter Your Email Address"
+                class="footer__input"
+                type="text"
+              />
+              <button class="footer__button">SUBSCRIBE</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">2023 furino. All rights reverved</div>
+      </footer>
+    </div>
     <script type="module" src="/src/scripts/products.ts"></script>
   </body>
 </html>
