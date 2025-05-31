@@ -16,4 +16,9 @@ export default class ServiceProducts {
     );
     return data;
   }
+
+  async getAllProducts() {
+    const { data } = await axios.get(`https://dummyjson.com/products`);
+    return data;
+  }
 }
