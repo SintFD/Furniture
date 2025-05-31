@@ -1,9 +1,21 @@
 import type { Product } from "../../types";
 
-export class CartView {
-  private cartItemsContainer = document.getElementById("cart-items")!;
-  private subtotalAmount = document.querySelector(".subtotal-amount")!;
-  private totalAmount = document.querySelector(".total-amount")!;
+export default class CartView {
+  private cartItemsContainer: HTMLElement;
+  private subtotalAmount: HTMLElement;
+  private totalAmount: HTMLElement;
+  private checkoutBtn: HTMLElement;
+  private successModal: HTMLElement;
+  private closeModalBtn: HTMLElement;
+
+  constructor() {
+    this.cartItemsContainer = document.getElementById("cart-items")!;
+    this.subtotalAmount = document.querySelector(".subtotal-amount")!;
+    this.totalAmount = document.querySelector(".total-amount")!;
+    this.checkoutBtn = document.querySelector(".checkout-btn")!;
+    this.successModal = document.getElementById("success-modal")!;
+    this.closeModalBtn = this.successModal.querySelector(".close-button")!;
+  }
 
   renderCartItems(items: Product[]): void {
     this.cartItemsContainer.innerHTML = "";
@@ -31,22 +43,66 @@ export class CartView {
     });
   }
 
-  updateTotals(total: number): void {
-    this.subtotalAmount.textContent = `Rs. ${total.toFixed(2)}`;
-    this.totalAmount.textContent = `Rs. ${total.toFixed(2)}`;
+  updateTotals(subtotal: number, total: number): void {
+    this.subtotalAmount.textContent = ` ${subtotal.toFixed(2)}$`;
+    this.totalAmount.textContent = ` ${total.toFixed(2)}$`;
+  }
+
+  bindRemoveProduct(handler: (id: number) => void) {
+    this.cartItemsContainer.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains("remove-btn")) {
+        const itemDiv = target.closest(".cart-item");
+        if (!itemDiv) return;
+
+        const idStr = (itemDiv as HTMLElement).dataset?.id;
+        if (!idStr) return;
+
+        const id = Number(idStr);
+        if (isNaN(id)) return;
+
+        handler(id);
+      }
+    });
+  }
+
+  bindQuantityChange(handler: (id: number, quantity: number) => void) {
+    this.cartItemsContainer.addEventListener("change", (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.classList.contains("quantity-input")) {
+        const itemDiv = target.closest(".cart-item");
+        if (!itemDiv) return;
+
+        const idStr = (itemDiv as HTMLElement).dataset?.id;
+        if (!idStr) return;
+
+        const id = Number(idStr);
+        if (isNaN(id)) return;
+
+        const quantity = Number(target.value);
+        if (isNaN(quantity) || quantity < 1) return;
+
+        handler(id, quantity);
+      }
+    });
+  }
+
+  bindCheckout(handler: () => void) {
+    this.checkoutBtn.addEventListener("click", handler);
+  }
+
+  showSuccessModal() {
+    this.successModal.classList.add("show");
+  }
+
+  hideSuccessModal() {
+    this.successModal.classList.remove("show");
+  }
+
+  bindCloseModal() {
+    this.closeModalBtn.addEventListener("click", () => this.hideSuccessModal());
+    this.successModal.addEventListener("click", (e) => {
+      if (e.target === this.successModal) this.hideSuccessModal();
+    });
   }
 }
-
-const modal = document.getElementById("success-modal") as HTMLElement;
-const closeButton = document.querySelector(".close-button") as HTMLElement;
-document.querySelector(".checkout-btn")?.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-closeButton.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-window.addEventListener("click", (event) => {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-});

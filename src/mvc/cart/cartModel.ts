@@ -1,54 +1,70 @@
 import type { Product } from "../../types";
 
-export class CartModel {
-  private items: Product[] = [];
+export default class CartModel {
+  private storageKey = "localCartArr";
 
-  constructor() {
-    this.loadFromStorage();
+  private getRawCart(): number[] {
+    const data = localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : [];
   }
 
-  addItem(product: Product): void {
-    const existing = this.items.find((item) => item.id === product.id);
-    if (existing) {
-      existing.quantity += product.quantity;
-    } else {
-      this.items.push(product);
+  private saveRawCart(arr: number[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(arr));
+  }
+
+  getCartItems(): { id: number; quantity: number }[] {
+    const arr = this.getRawCart();
+    const counts: Record<number, number> = {};
+    arr.forEach((id) => {
+      counts[id] = (counts[id] || 0) + 1;
+    });
+
+    return Object.entries(counts).map(([id, quantity]) => ({
+      id: Number(id),
+      quantity,
+    }));
+  }
+
+  addProduct(id: number) {
+    const arr = this.getRawCart();
+    arr.push(id);
+    this.saveRawCart(arr);
+  }
+  removeProduct(id: number) {
+    const arr = this.getRawCart();
+    const filtered = arr.filter((itemId) => itemId !== id);
+    this.saveRawCart(filtered);
+  }
+
+  updateQuantity(id: number, quantity: number) {
+    if (quantity < 1) return;
+
+    const arr = this.getRawCart().filter((itemId) => itemId !== id);
+    for (let i = 0; i < quantity; i++) {
+      arr.push(id);
     }
-    this.saveToStorage();
+    this.saveRawCart(arr);
   }
 
-  removeItem(productId: number): void {
-    this.items = this.items.filter((item) => item.id !== productId);
-    this.saveToStorage();
+  clearCart() {
+    localStorage.removeItem(this.storageKey);
   }
 
-  updateQuantity(productId: number, quantity: number): void {
-    const item = this.items.find((item) => item.id === productId);
-    if (item) {
-      item.quantity = quantity;
-      this.saveToStorage();
-    }
-  }
-
-  getItems(): Product[] {
-    return this.items;
-  }
-
-  getTotal(): number {
-    return this.items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-  }
-
-  private saveToStorage(): void {
-    localStorage.setItem("cart", JSON.stringify(this.items));
-  }
-
-  private loadFromStorage(): void {
-    const data = localStorage.getItem("cart");
-    if (data) {
-      this.items = JSON.parse(data);
-    }
+  async fetchProducts(): Promise<Product[]> {
+    const cartItems = this.getCartItems();
+    const promises = cartItems.map(async (cartItem) => {
+      const response = await fetch(
+        `https://dummyjson.com/products/${cartItem.id}`
+      );
+      const data = await response.json();
+      return {
+        id: data.id,
+        title: data.title,
+        price: data.price,
+        thumbnail: data.thumbnail,
+        quantity: cartItem.quantity,
+      };
+    });
+    return Promise.all(promises);
   }
 }

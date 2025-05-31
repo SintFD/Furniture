@@ -1,59 +1,43 @@
-import { ProductService } from "../../service/products";
-import { CartModel } from "./cartModel";
-import { CartView } from "./cartView";
+import type CartModel from "./cartModel";
+import type CartView from "./cartView";
 
-export class CartController {
-  private cartModel = new CartModel();
-  private cartView = new CartView();
-  private productService = new ProductService();
-
-  constructor() {
-    this.init();
+export default class CartController {
+  private model: CartModel;
+  private view: CartView;
+  constructor(model: CartModel, view: CartView) {
+    this.model = model;
+    this.view = view;
   }
 
-  private async init(): Promise<void> {
-    const items = this.cartModel.getItems();
-    const detailedItems = await Promise.all(
-      items.map(async (item) => {
-        const product = await this.productService.getProductById(item.id);
-        return { ...product, quantity: item.quantity };
-      })
-    );
-    this.cartModel = new CartModel();
-    detailedItems.forEach((item) => this.cartModel.addItem(item));
-    this.cartView.renderCartItems(this.cartModel.getItems());
-    this.cartView.updateTotals(this.cartModel.getTotal());
-    this.setupEventListeners();
+  public async init() {
+    await this.render();
+
+    this.view.bindRemoveProduct(this.handleRemoveProduct.bind(this));
+    this.view.bindQuantityChange(this.handleQuantityChange.bind(this));
+    this.view.bindCheckout(this.handleCheckout.bind(this));
+    this.view.bindCloseModal();
   }
 
-  private setupEventListeners(): void {
-    document
-      .getElementById("cart-items")!
-      .addEventListener("click", (event) => {
-        const target = event.target as HTMLElement;
-        const itemDiv = target.closest(".cart-item") as HTMLElement;
-        if (!itemDiv) return;
-        const productId = parseInt(itemDiv.dataset.id!);
+  private async render() {
+    const products = await this.model.fetchProducts();
+    this.view.renderCartItems(products);
+    const subtotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
+    this.view.updateTotals(subtotal, subtotal);
+  }
 
-        if (target.classList.contains("remove-btn")) {
-          this.cartModel.removeItem(productId);
-          this.cartView.renderCartItems(this.cartModel.getItems());
-          this.cartView.updateTotals(this.cartModel.getTotal());
-        }
-      });
+  private handleRemoveProduct(id: number) {
+    this.model.removeProduct(id);
+    this.render();
+  }
 
-    document
-      .getElementById("cart-items")!
-      .addEventListener("change", (event) => {
-        const target = event.target as HTMLInputElement;
-        if (target.classList.contains("quantity-input")) {
-          const itemDiv = target.closest(".cart-item") as HTMLElement;
-          const productId = parseInt(itemDiv.dataset.id!);
-          const quantity = parseInt(target.value);
-          this.cartModel.updateQuantity(productId, quantity);
-          this.cartView.renderCartItems(this.cartModel.getItems());
-          this.cartView.updateTotals(this.cartModel.getTotal());
-        }
-      });
+  private handleQuantityChange(id: number, quantity: number) {
+    this.model.updateQuantity(id, quantity);
+    this.render();
+  }
+
+  private handleCheckout() {
+    this.view.showSuccessModal();
+    this.model.clearCart();
+    this.render();
   }
 }
