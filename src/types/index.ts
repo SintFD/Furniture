@@ -1,8 +1,13 @@
 export interface Product {
+  id: number;
   title: string;
   price: number;
-  category: string;
-  id: number;
   thumbnail: string;
-  discountPercentage: number;
+  quantity: number;
+  discountPercentage?: number;
+}
+
+export interface CartItem {
+  id: number;
+  quantity: number;
 }
