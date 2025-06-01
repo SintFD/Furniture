@@ -24,15 +24,15 @@ export default class ServiceProducts {
   }
 }
 
-export class ProductService {
+export class ProductAPIService {
   async getProductById(id: number): Promise<Product> {
-    const response = await axios.get(`https://dummyjson.com/products/${id}`);
-    const data = response.data;
+    const { data } = await axios.get(`https://dummyjson.com/products/${id}`);
     return {
       id: data.id,
       title: data.title,
       price: data.price,
       thumbnail: data.thumbnail,
+      description: data.description,
       quantity: 1,
     };
   }
