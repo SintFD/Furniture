@@ -86,6 +86,40 @@ export default class CartView {
       }
     });
   }
+  showProductModal(product: Product) {
+    const modalHTML = `
+    <div class="modal-overlay" id="cart-product-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <img class="modal-image" src="${product.thumbnail}" alt="${
+      product.title
+    }" />
+        <h2>${product.title}</h2>
+        <p class="modal-price">${product.price}$</p>
+        <p class="modal-description">${
+          product.description || "Нет описания."
+        }</p>
+      </div>
+    </div>
+  `;
+
+    const existing = document.getElementById("cart-product-modal");
+    if (existing) existing.remove();
+
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    document.getElementById("modal-close")?.addEventListener("click", () => {
+      document.getElementById("cart-product-modal")?.remove();
+    });
+
+    document
+      .getElementById("cart-product-modal")
+      ?.addEventListener("click", (e) => {
+        if (e.target === document.getElementById("cart-product-modal")) {
+          document.getElementById("cart-product-modal")?.remove();
+        }
+      });
+  }
 
   bindCheckout(handler: () => void) {
     this.checkoutBtn.addEventListener("click", handler);
@@ -97,6 +131,19 @@ export default class CartView {
 
   hideSuccessModal() {
     this.successModal.classList.remove("show");
+  }
+  bindImageClick(handler: (id: number) => void) {
+    this.cartItemsContainer.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName.toLowerCase() === "img") {
+        const itemDiv = target.closest(".cart-item");
+        if (!itemDiv) return;
+        const idStr = itemDiv.getAttribute("data-id");
+        if (!idStr) return;
+        const id = Number(idStr);
+        if (!isNaN(id)) handler(id);
+      }
+    });
   }
 
   bindCloseModal() {
