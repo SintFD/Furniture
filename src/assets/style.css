@@ -234,8 +234,13 @@ a {
 }
 
 .product-card {
+  width: 250px;
+  border-radius: 8px;
+  overflow: hidden;
   position: relative;
   background: rgb(244, 245, 247);
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card__discount {
@@ -307,4 +312,17 @@ a {
   font-weight: 600;
   padding: 12px 55px;
   cursor: pointer;
+}
+
+.related-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
