@@ -6,7 +6,21 @@ export default class FavoritesView {
     if (!container) return;
     container.innerHTML = `<p>В избранном пусто.</p>`;
   }
+  static showToast(message: string) {
+    const toast = document.createElement("div");
+    toast.className = "custom-toast";
+    toast.textContent = message;
 
+    const existing = document.querySelector(".custom-toast");
+    if (existing) existing.remove();
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add("fade-out");
+      toast.addEventListener("transitionend", () => toast.remove());
+    }, 2000);
+  }
   static renderProducts(products: Product[], containerId: string) {
     const container = document.getElementById(containerId);
     if (!container) return;

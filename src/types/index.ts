@@ -6,6 +6,7 @@ export interface Product {
   quantity?: number;
   discountPercentage?: number;
   description?: string;
+  category?: string;
 }
 
 export interface CartItem {

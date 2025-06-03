@@ -1,5 +1,3 @@
-// src/mvc/singleProduct/singleProductView.ts
-
 import type { Product } from "../../types/index";
 import LocalStorage from "../../utils/storage";
 
@@ -21,7 +19,6 @@ export default class SingleProductView {
   private showMoreBtn: HTMLButtonElement;
 
   constructor() {
-    // Элементы для основного товара
     this.mainImage = document.querySelector(".main-product-image")!;
     this.titleElement = document.querySelector(".asgaard-h1")!;
     this.priceElement = document.querySelector(".price")!;
