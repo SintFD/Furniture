@@ -5,9 +5,236 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <link rel="stylesheet" href="/src/assets/product.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <header class="header">
+        <div class="header__logo">
+          <img src="./src/assets/images/logo-icon.png" alt="" />
+        </div>
+        <nav class="header__nav">
+          <a href="/index.html" class="header__home">Home</a>
+          <a href="/products.html" class="header__shop">Shop</a>
+          <a href="" class="header__about">About</a>
+          <a href="" class="header__contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <a href=""><img src="./src/assets/images/user-icon.png" alt="" /></a>
+          <a href=""
+            ><img src="./src/assets/images/search-icon.png" alt=""
+          /></a>
+          <a href="./favorites.html"
+            ><img src="./src/assets/images/favorites-icon.png" alt=""
+          /></a>
+          <a href="/cart.html"
+            ><img src="./src/assets/images/cart-icon.png" alt=""
+          /></a>
+        </div>
+      </header>
+      <main class="main-container">
+        <div class="breadcrumb">
+          <ul class="breadcrumb-history">
+            <li class="history-item">
+              <a class="home-link" href="/index.html">Home</a>
+            </li>
+            <p>></p>
+            <li class="history-item">
+              <a class="shop-link" href="/products.html">Shop</a>
+            </li>
+            <p>></p>
+            <div class="cutter"></div>
+            <li class="history-item">
+              <a class="asgaard-link" href="">Asgaard sofa</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="container">
+          <!-- <div class="thumbnail-gallery">
+            <div class="thumbnail-wrapper">
+              <img
+                class="thumbnail-img"
+                src="/src/assets/images/thumpnail-1.png"
+                alt="thumbnail-1"
+              />
+            </div>
+            <div class="thumbnail-wrapper">
+              <img
+                class="thumbnail-img"
+                src="/src/assets/images/thumbnail-2.png"
+                alt="thumbnail-2"
+              />
+            </div>
+            <div class="thumbnail-wrapper">
+              <img
+                class="thumbnail-img"
+                src="/src/assets/images/thumbnail-3.png"
+                alt="thumbnail-3"
+              />
+            </div>
+            <div class="thumbnail-wrapper">
+              <img
+                class="thumbnail-img"
+                src="/src/assets/images/thumbnail-4.png"
+                alt="thumbnail-4"
+              />
+            </div>
+          </div> -->
+          <div class="main-image">
+            <img class="main-product-image" src="" alt="Asgaard Sofa" />
+          </div>
+          <div class="info">
+            <h1 class="asgaard-h1">Asgaard sofa</h1>
+            <div class="price"></div>
+            <div class="stars">
+              ⭐⭐⭐⭐☆ &nbsp; <span>5 Customer Review</span>
+            </div>
+            <div class="desc">
+              Setting the bar as one of the loudest speakers in its class, the
+              Kilburn is a compact, stout-hearted hero with a well-balanced
+              audio which boasts a clear midrange and extended highs for a
+              sound.
+            </div>
+            <div class="size">
+              <label class="size-label">Size</label><br />
+              <span class="active">L</span>
+              <span>XL</span>
+              <span>XS</span>
+            </div>
+            <div class="color">
+              <label class="color-label">Color</label>
+              <div class="circles">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+              </div>
+            </div>
+            <div class="controle-section">
+              <div class="counter-box">
+                <button class="decrement">-</button>
+                <span id="quantity">1</span>
+                <button class="increment">+</button>
+              </div>
+              <button class="add-btn">Add To Cart</button>
+              <button class="compare-btn">+ Compare</button>
+            </div>
+            <div class="product-details">
+              <div class="product-details-row">
+                <strong>SKU</strong> : <span>SS001</span>
+              </div>
+              <div class="product-details-row">
+                <strong>Category</strong> : <span>Sofas</span>
+              </div>
+              <div class="product-details-row">
+                <strong>Tags</strong> : <span>Sofa, Chair, Home, Shop</span>
+              </div>
+              <div class="product-details-row">
+                <div class="share-icons">
+                  <strong>Share</strong> :
+                  <img src="/src/assets/images/facebook.png" alt="" />
+                  <img src="/src/assets/images/in.png" alt="" />
+                  <img src="/src/assets/images/twitter.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <section class="infromation-section">
+          <ul class="section-navigation">
+            <li class="active-navigation-item">Description</li>
+            <li class="navigation-item">Additional Information</li>
+            <li class="navigation-item">Reviews [5]</li>
+          </ul>
+          <div class="infromation-description">
+            <p class="first-description">
+              Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn
+              portable active stereo speaker takes the unmistakable look and
+              sound of Marshall, unplugs the chords, and takes the show on the
+              road.
+            </p>
+            <p class="second-description">
+              Weighing in under 7 pounds, the Kilburn is a lightweight piece of
+              vintage styled engineering. Setting the bar as one of the loudest
+              speakers in its class, the Kilburn is a compact, stout-hearted
+              hero with a well-balanced audio which boasts a clear midrange and
+              extended highs for a sound that is both articulate and pronounced.
+              The analogue knobs allow you to fine tune the controls to your
+              personal preferences while the guitar-influenced leather strap
+              enables easy and stylish travel.
+            </p>
+          </div>
+          <div class="information-images">
+            <div class="first-image">
+              <img
+                src="/src/assets/images/information-sofa1.png"
+                alt=""
+                class="sofa-info"
+              />
+            </div>
+            <div class="second-image">
+              <img
+                src="/src/assets/images/infromation-sofa2.png"
+                alt=""
+                class="sofa-info"
+              />
+            </div>
+          </div>
+        </section>
+        <hr />
+        <section class="related-section">
+          <h2 class="related-h2">Related Products</h2>
+          <ul class="related-list"></ul>
+          <button class="show-btn">Show More</button>
+          <hr />
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="footer__container">
+          <div>
+            <h3 class="footer__title">Funiro.</h3>
+            <p>
+              400 University Drive Suite 200 Coral <br />
+              Gables, FL 33134 USA
+            </p>
+          </div>
+          <div>
+            <p>Links</p>
+            <ul class="footer__list">
+              <li>Home</li>
+              <li>Shop</li>
+              <li>About</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+          <div>
+            <p>Help</p>
+            <ul class="footer__list">
+              <li>Payment Options</li>
+              <li>Returns</li>
+              <li>Privacy Policies</li>
+            </ul>
+          </div>
+          <div>
+            <p>Newsletter</p>
+            <div class="footer__subscribe">
+              <input
+                placeholder="Enter Your Email Address"
+                class="footer__input"
+                type="text"
+              />
+              <button class="footer__button">SUBSCRIBE</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">2023 furino. All rights reverved</div>
+      </footer>
+    </div>
     <script type="module" src="/src/scripts/product.ts"></script>
   </body>
 </html>
