@@ -123,10 +123,11 @@ export default class SingleProductView {
    */
   renderRelatedProducts(
     products: Product[],
-    loadProducts?: (
+    loadProducts: (
       limit: number,
       skip: number
-    ) => Promise<{ products: Product[] }>
+    ) => Promise<{ products: Product[] }>,
+    skip: number = 0
   ) {
     this.relatedList.innerHTML = "";
 
@@ -202,9 +203,9 @@ export default class SingleProductView {
       this.showMoreBtn.addEventListener(
         "click",
         async () => {
-          const skip = this.relatedList.children.length;
+          skip = skip + 4;
           const { products: more } = await loadProducts(4, skip);
-          this.renderRelatedProducts(more, loadProducts);
+          this.renderRelatedProducts(more, loadProducts, skip);
         },
         { once: true }
       );
