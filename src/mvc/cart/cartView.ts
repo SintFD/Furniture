@@ -35,7 +35,7 @@ export default class CartView {
           }" min="1" class="quantity-input" />
         </div>
         <div class="product-subtotal">${(
-          product.price * product.quantity
+          product.price * product.quantity!
         ).toFixed(2)}$</div>
         <button class="remove-btn">🗑️</button>
       `;

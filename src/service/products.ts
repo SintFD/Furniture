@@ -4,9 +4,14 @@ import type { Product } from "../types";
 export default class ServiceProducts {
   constructor() {}
 
-  async loadProducts(lim: number, skip: number) {
+  async loadProducts(
+    lim: number,
+    skip: number,
+    sortBy: string = "",
+    order: string = ""
+  ) {
     const { data } = await axios.get(
-      `https://dummyjson.com/products?&limit=${lim}&skip=${skip}`
+      `https://dummyjson.com/products?&limit=${lim}&skip=${skip}&sortBy=${sortBy}&order=${order}`
     );
     return data;
   }

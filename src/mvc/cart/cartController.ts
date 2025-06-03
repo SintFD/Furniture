@@ -23,7 +23,10 @@ export default class CartController {
   private async render() {
     const products = await this.model.fetchProducts();
     this.view.renderCartItems(products);
-    const subtotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
+    const subtotal = products.reduce(
+      (sum, p) => sum + p.price * p.quantity!,
+      0
+    );
     this.view.updateTotals(subtotal, subtotal);
   }
 
