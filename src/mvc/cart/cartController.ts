@@ -1,3 +1,4 @@
+import { ProductAPIService } from "../../service/products";
 import type CartModel from "./cartModel";
 import type CartView from "./cartView";
 
@@ -16,12 +17,16 @@ export default class CartController {
     this.view.bindQuantityChange(this.handleQuantityChange.bind(this));
     this.view.bindCheckout(this.handleCheckout.bind(this));
     this.view.bindCloseModal();
+    this.view.bindImageClick(this.handleImageClick.bind(this));
   }
 
   private async render() {
     const products = await this.model.fetchProducts();
     this.view.renderCartItems(products);
-    const subtotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
+    const subtotal = products.reduce(
+      (sum, p) => sum + p.price * p.quantity!,
+      0
+    );
     this.view.updateTotals(subtotal, subtotal);
   }
 
@@ -34,7 +39,11 @@ export default class CartController {
     this.model.updateQuantity(id, quantity);
     this.render();
   }
-
+  private async handleImageClick(id: number) {
+    const service = new ProductAPIService();
+    const product = await service.getProductById(id);
+    this.view.showProductModal(product);
+  }
   private handleCheckout() {
     this.view.showSuccessModal();
     this.model.clearCart();

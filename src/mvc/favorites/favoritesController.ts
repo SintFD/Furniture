@@ -47,7 +47,7 @@ export default class FavoritesController {
 
       if (target.classList.contains("add-btn")) {
         LocalStorage.setLocalArr("localCartArr", id);
-        alert(`Продукт добавлен в корзину ✅`);
+        FavoritesView.showToast("Продукт добавлен в корзину ✅");
       }
 
       if (target.classList.contains("cart-image")) {
