@@ -59,10 +59,12 @@
         </section>
         <section class="filter-bar">
           <div class="filter-bar__container">
-            <button class="filter-bar__filter-btn">
-              <img src="./src/assets/images.products/filter-icon.svg" />
-              <span class="filter-bar__filter-text">Filter</span>
-            </button>
+            <img src="./src/assets/images.products/filter-icon.svg" />
+            <select>
+              <option hidden>Filter</option>
+              <option>By category</option>
+              <option>By price</option>
+            </select>
             <button class="filter-bar__grid-btn">
               <img src="./src/assets/images.products/four-dots-icon.svg" />
             </button>
@@ -83,10 +85,9 @@
                 >Show</label
               >
               <select id="items-per-page" class="filter-controls__select">
+                <option value="4">4</option>
                 <option value="8">8</option>
-                <option value="12">12</option>
-                <option value="16">16</option>
-                <option value="20">20</option>
+                <option value="16" selected>16</option>
               </select>
             </div>
 
@@ -98,7 +99,6 @@
                 <option value="default">Default</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
-                <option value="newness-desc">Newest</option>
               </select>
             </div>
           </div>

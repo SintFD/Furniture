@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { Product } from "../types";
 
 export default class ServiceProducts {
   constructor() {}
@@ -25,5 +26,19 @@ export default class ServiceProducts {
   async getAllProducts() {
     const { data } = await axios.get(`https://dummyjson.com/products`);
     return data;
+  }
+}
+
+export class ProductAPIService {
+  async getProductById(id: number): Promise<Product> {
+    const { data } = await axios.get(`https://dummyjson.com/products/${id}`);
+    return {
+      id: data.id,
+      title: data.title,
+      price: data.price,
+      thumbnail: data.thumbnail,
+      description: data.description,
+      quantity: 1,
+    };
   }
 }

@@ -138,8 +138,6 @@ a {
 }
 
 .hero {
-  /* width: 1440px;
-  height: 316px; */
   background-image: url("./images.products/hero-img.png");
   background-size: cover;
   background-position: center;
@@ -166,8 +164,6 @@ a {
   align-items: center;
   gap: 14px;
 }
-/* .hero__item {
-} */
 
 .hero__link {
   color: rgb(0, 0, 0);
@@ -461,4 +457,60 @@ a {
 .products__page-btn:hover {
   background-color: #b88e2f;
   color: white;
+}
+
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.filter-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.filter-modal h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.category-list {
+  margin-bottom: 15px;
+}
+
+.category-list li {
+  margin-bottom: 8px;
+}
+
+.price-range {
+  margin-bottom: 15px;
+}
+
+.price-range input[type="range"] {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.apply-filter {
+  background-color: #b88e2f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }

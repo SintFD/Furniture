@@ -8,7 +8,19 @@ export default class ProductsController {
     this.model = model;
     this.view = view;
   }
-  init() {
-    this.view.renderProductsCards(this.model.loadProducts);
+  async init() {
+    await this.view.renderProductsCards(
+      this.model.loadProducts.bind(this.model)
+    );
+    this.view.setupPagination(this.model.loadProducts.bind(this.model));
+    this.view.initFilters(this.model.loadProducts.bind(this.model));
+    this.view.initSort(this.model.loadProducts.bind(this.model));
+
+    this.view.itemsPerPageSelect.addEventListener("change", async () => {
+      await this.view.renderProductsCards(
+        this.model.loadProducts.bind(this.model)
+      );
+      this.view.setupPagination(this.model.loadProducts.bind(this.model));
+    });
   }
 }
