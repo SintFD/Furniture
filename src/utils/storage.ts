@@ -13,4 +13,9 @@ export default class LocalStorage {
     arr.push(productId);
     return localStorage.setItem(name, JSON.stringify(arr));
   }
+
+  static removeFromLocalArr(name: string, productId: number) {
+    const arr = this.getLocalArr(name).filter((id) => id !== productId);
+    localStorage.setItem(name, JSON.stringify(arr));
+  }
 }

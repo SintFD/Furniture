@@ -3,8 +3,9 @@ export interface Product {
   title: string;
   price: number;
   thumbnail: string;
-  quantity: number;
+  quantity?: number;
   discountPercentage?: number;
+  description?: string;
 }
 
 export interface CartItem {
