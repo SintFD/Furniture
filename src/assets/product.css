@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  font-family: "Poppins";
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -133,7 +139,7 @@ body {
 }
 
 .breadcrumb {
-  width: 1440px;
+  /* width: 1440px; */
   height: 100px;
   background: rgb(249, 241, 231);
   display: flex;
@@ -144,6 +150,8 @@ body {
 .breadcrumb-history {
   display: flex;
   gap: 16px;
+  width: 1240px;
+  margin: 0 auto;
 }
 
 .home-link {
@@ -187,14 +195,19 @@ body {
 
 .container {
   display: flex;
-  margin-top: 30px;
+
   gap: 40px;
-  padding-left: 100px;
+  /* padding-left: 100px; */
+  width: 1250px;
+  margin: 30px auto;
 }
 
 .main-container {
-  margin-right: 100px;
-  margin-left: 100px;
+  /* margin-right: 100px;
+  margin-left: 100px; */
+  /* width: 1300px;
+  margin: 0 auto; */
+  width: 100%;
 }
 
 .thumbnail-gallery {
@@ -471,6 +484,8 @@ body {
 .infromation-section {
   margin-top: 48px;
   margin-bottom: 66px;
+  display: grid;
+  justify-items: center;
 }
 
 .first-description {
@@ -501,8 +516,8 @@ body {
 
 .information-images {
   display: flex;
-  gap: 50px;
-  padding-left: 100px;
+  gap: 40px;
+  /* padding-left: 100px; */
 }
 
 .first-image {
@@ -572,9 +587,9 @@ body {
 .related-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
+  gap: 20px;
   padding: 16px;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
@@ -666,4 +681,8 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 4px;
+}
+
+.main-product-image {
+  width: 100%;
 }

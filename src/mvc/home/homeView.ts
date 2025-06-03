@@ -44,7 +44,7 @@ export default class HomeController {
 
       productCard.classList.add("product-card");
       productCard.innerHTML = `<div class='product-card__discount'>-${Math.floor(
-        product.discountPercentage
+        product.discountPercentage!
       )}%</div>
       <img src=${product.thumbnail}>
       <div class='product-card__container'>
